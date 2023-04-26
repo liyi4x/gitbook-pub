@@ -1,0 +1,60 @@
+name: 'Gitbook Pub'
+description: 'Github Action For Gitbook'
+author: 'liyi'
+branding:
+  icon: 'book'
+  color: 'gray-dark'
+inputs:
+  time_zone:
+    description: 'Default is Asia/Shanghai'
+    required: false
+    default: 'Asia/Shanghai'
+  source_token:
+    description: 'Token for source_repo(clone token)'
+    required: true
+  source_hub:
+    description: 'Default is github.com, can be gitlib.com  gitee.com ...'
+    required: flase
+    default: 'github.com'
+  source_repo:
+    description: 'Default is GITHUB_REPOSITORY, if not please add like username/reponame'
+    required: false
+  source_branch:
+    description: 'Default is master'
+    required: false
+    default: 'master'
+  git_name:
+    description: 'Default is GITHUB_ACTOR, If git name is different with github, please add'
+    required: false
+  git_email:
+    description: 'Default is **@users.noreply.github.com If git name is different with github, please add'
+    required: false
+  publish_token:
+    description: 'Token for publish_repo(clone push token)'
+    required: false
+  publish_hub:
+    description: 'Default is github.com'
+    required: false
+    default: 'github.com'
+  publish_repo:
+    description: 'Default is same as source_repo'
+    required: false
+  publish_branch:
+    description: 'Defaule is gh-pages, auto create'
+    required: false
+    default: 'gh-pages'
+runs:
+  using: 'docker'
+  image: 'docker://liyi4x/gitbook-pub:latest'
+  args:
+    - ${{ inputs.time_zone }}
+    - ${{ inputs.source_token }}
+    - ${{ inputs.source_hub }}
+    - ${{ inputs.source_repo }}
+    - ${{ inputs.source_branch }}
+    - ${{ inputs.git_name }}
+    - ${{ inputs.git_email }}
+    - ${{ inputs.publish_token }}
+    - ${{ inputs.publish_hub }}
+    - ${{ inputs.publish_repo }}
+    - ${{ inputs.publish_branch }}
